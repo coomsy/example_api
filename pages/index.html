@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello Friend...</h1>
+    <h2>Access links below, and do task accordly</h2>
+    <h4>If you get a 500, please try and provide the header required for json data</h4>
+    <table>
+        <tr>
+            <th>Methods Allowed</th>
+            <th>Endpoint</th>
+            <th>Task</th>
+            <th>Difficulty</th>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/auth</td>
+            <td>
+                Basic auth to this endpoint with creds... Username is "<u>wayne</u>", Password is "<u>Youre10PlyBud!</u>". <br>
+                You'll get back a header 'Token', you'll need to provide it and its value as a header for your next API calls.
+            </td>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>/alcohol</td>
+            <td>
+                Data to be used for rest of Challenges (below)
+            </td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/alcohol/activity/1</td>
+            <td>
+                Send the name of the MOST expensive item,<br>
+                PAYLOAD EX {'answer': 'YOUR_GUESS_HERE'}
+            </td>
+            <td>ez pz</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/alcohol/activity/2</td>
+            <td>
+                Send the name of the LEAST expensive item,<br>
+                PAYLOAD EX {'answer': 'YOUR_GUESS_HERE'}
+            </td>
+            <td>ez pz</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/alcohol/activity/3</td>
+            <td>
+                Send the top 10% most expensive items,<br>
+                PAYLOAD EX {'answer': [ {name,price},{name,price},... ] }
+            </td>
+            <td>smedium</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>/alcohol/activity/4</td>
+            <td>
+                Clean up the product names, and remove all punctionation and special chars<br>
+                PAYLOAD EX {'answer': [ {name,price},{name,price},... ] }
+            </td>
+            <td>gettin spicy</td>
+        </tr>
+    </table>
+</body>
+
+</html>
