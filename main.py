@@ -28,7 +28,7 @@ def auth():
 ## easy
 @app.route('/alcohol')
 def alcohol():
-    if _token_value not in request.headers:
+    if not request.headers.get('Token') or _token_value not in request.headers.get('Token'):
         return Response(response='{"error":"Wheres my Token mf"}', status=400)
     return Response(response=open('data/alcohol.json', 'r').read(), status=200) 
 
@@ -36,7 +36,7 @@ def alcohol():
 # START validating exercise
 @app.route('/alcohol/activity/<num>', methods = ['POST'])
 def check_their_work(num):
-    if _token_value not in request.headers:
+    if not request.headers.get('Token') or _token_value not in request.headers.get('Token'):
         return Response(response='{"error":"Wheres my Token mf"}', status=400)
     data = json.loads(open('data/alcohol.json', 'r').read())
     
