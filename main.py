@@ -15,9 +15,10 @@ def hello_world():
 # START Authorization methods
 @app.route('/auth', methods = ['POST'])
 def auth():
+    print(request.headers)
     if creds := request.headers.get('Authorization'):
         creds = b64decode(creds.split(' ')[-1]).decode().split(':',1)
-        if not (creds[0] == 'wayne' and creds[1] == 'Youre10PlyBud!'):
+        if creds[0] == 'wayne' and creds[1] == 'Youre10PlyBud!':
             return Response(response='Very Nice', 
                             status=200,
                             headers={'Token': _token_value}) 
