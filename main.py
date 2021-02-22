@@ -6,7 +6,7 @@ import string
 
 app = Flask(__name__)
 
-_token_value = "You'reInItToWinIt+" + str(time())
+_token_value = "You'reInItToWinIt"
 
 @app.route('/')
 def hello_world():
@@ -16,7 +16,7 @@ def hello_world():
 @app.route('/auth', methods = ['POST'])
 def auth():
     if creds := request.headers.get('Authorization'):
-        creds = b64decode(creds.split(' ')[-1]).split(':',1)
+        creds = b64decode(creds.split(' ')[-1]).decode().split(':',1)
         if not (creds[0] == 'wayne' and creds[1] == 'Youre10PlyBud!'):
             return Response(response='Very Nice', 
                             status=200,
