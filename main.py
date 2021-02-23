@@ -44,11 +44,17 @@ def check_their_work(num):
     data = json.loads(open('data/alcohol.json', 'r').read())
     
     try:
-        learner_answer = request.json()['answer']
+        learner_answer = request.json()
     except:
         # no idea what error is, just tell em they didn't format correctly
-        return Response(response='{"error": "Going to assume you did not provide answer correctly? See / page"', 
+        return Response(response='{"error": "What did you just send me?... this aint json?"', 
                         status=400)
+    
+    if not learner_answer.get('answer'):
+        return Response(response='{"error": "Could not find key \"answer\"... see / page"', 
+                        status=400)
+
+    learner_answer = learner_answer['answer']
 
     # !!! IMPORTANT !!!
     #! no this isn't how I write stuff, this app is for fun. So I try to do one liners 
@@ -78,7 +84,7 @@ def check_their_work(num):
     if answer == learner_answer:
         return Response(response='{"data": "Nice Going bud"}', status=200)
     else:
-        return Response(response='{"error": "What in sam hell"}', status=400)
+        return Response(response='{"error": "Was the answer correct? In the words of the late E40, NOPE."}', status=400)
 
 
 if __name__ == '__main__':
