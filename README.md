@@ -3,7 +3,10 @@ For individuals that need help working with apis
 
 Run following commands to get start
 ```bash
+# windows
 python -m venv learning_env
+# mac/linux
+python3 -m venv learning_env
 
 # This is different on linux/mac I think, scripts is lowercase
 .\learning_env\Scripts\activate 
