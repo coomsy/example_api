@@ -16,16 +16,19 @@ def hello_world():
 @app.route('/auth', methods = ['POST'])
 def auth():
     print(request.headers)
-    #if creds := request.headers.get('Authorization'):
+    #if creds := request.headers.get('Authorization'): just wanted to flex with walrus
     creds = request.headers.get('Authorization')
     if creds:
         creds = b64decode(creds.split(' ')[-1]).decode().split(':',1)
         if creds[0] == 'wayne' and creds[1] == 'Youre10PlyBud!':
-            return Response(response='Very Nice', 
+            return Response(response=json.dumps({
+                                'Message': 'Good Job there bud',
+                                'Token': _token_value
+                            }), 
                             status=200,
                             headers={'Token': _token_value}) 
     
-    return Response(response='Yah Fucked up bud', status=400)
+    return Response(response='{"error": "ooo, yah thats not how you do that"}', status=400)
         
 # START Data Structures
 ## easy
@@ -39,14 +42,13 @@ def alcohol():
 # START validating exercise
 @app.route('/alcohol/activity/<num>', methods = ['POST'])
 def check_their_work(num):
-    print('Got request for ' + str(num))
+    print(f'Got request for activity[{num}]')
     if not request.headers.get('Token') or _token_value not in request.headers.get('Token'):
         return Response(response='{"error":"Wheres my Token mf"}', status=400)
     data = json.loads(open('data/alcohol.json', 'r').read())
     
     try:
         learner_answer = json.loads(request.data.decode())
-        print(learner_answer)
     except Exception as ex:
         print(repr(ex))
         # no idea what error is, just tell em they didn't format correctly
@@ -85,11 +87,11 @@ def check_their_work(num):
             answer.append(item)
 
     if answer == learner_answer:
-        return Response(response='{"data": "Nice Going bud"}', status=200)
+        return Response(response='{"Message": "Nice Going bud. On to the next.. Pitter patter"}', status=200)
     else:
         return Response(response='{"error": "Was the answer correct? In the words of the late E40, NOPE."}', status=400)
 
 
 if __name__ == '__main__':
-    print('letsa GO')
-    app.run(use_reloader=True)
+    #app.run(use_reloader=True)
+    app.run()
