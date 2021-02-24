@@ -18,7 +18,7 @@ pip3 install -r requirements.txt
 # Windows
 python main.py
 # Mac/Linux
-python main.py
+python3 main.py
 
 
 # to stop 
