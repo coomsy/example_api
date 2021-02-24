@@ -8,13 +8,18 @@ python -m venv learning_env
 # mac/linux
 python3 -m venv learning_env
 
-# This is different on linux/mac I think, scripts is lowercase
+# Windows
 .\learning_env\Scripts\activate 
+# Mac/Linux
+source learning_env/bin/activate
 
 pip3 install -r requirements.txt
 
-# To start vvv
+# Windows
 python main.py
+# Mac/Linux
+python main.py
+
 
 # to stop 
 # CTRL + C
