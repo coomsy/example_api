@@ -34,7 +34,7 @@ def auth():
 ## easy
 @app.route('/alcohol')
 def alcohol():
-    if not request.headers.get('Token') or _token_value not in request.headers.get('Token'):
+    if _token_value != request.headers.get('Token'):
         return Response(response='{"error":"Wheres my Token mf"}', status=400)
     return Response(response=open('data/alcohol.json', 'r').read(), status=200) 
 
@@ -43,7 +43,7 @@ def alcohol():
 @app.route('/alcohol/activity/<num>', methods = ['POST'])
 def check_their_work(num):
     print(f'Got request for activity[{num}]')
-    if not request.headers.get('Token') or _token_value not in request.headers.get('Token'):
+    if _token_value != request.headers.get('Token'):
         return Response(response='{"error":"Wheres my Token mf"}', status=400)
     data = json.loads(open('data/alcohol.json', 'r').read())
     
