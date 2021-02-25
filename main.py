@@ -86,10 +86,19 @@ def check_their_work(num):
                 item = { key.replace(char, ''):value for key,value in item.items() }
             answer.append(item)
 
-    if answer == learner_answer:
-        return Response(response='{"Message": "Nice Going bud. On to the next.. Pitter patter"}', status=200)
-    else:
-        return Response(response='{"error": "Was the answer correct? In the words of the late E40, NOPE."}', status=400)
+    if isinstance(answer, str):
+        if answer == learner_answer:
+            return Response(response='{"Message": "Nice Going bud. On to the next.. Pitter patter"}', status=200)
+        else:
+            return Response(response='{"error": "Was the answer correct? In the words of the late E40, NOPE."}', status=400)
+    elif isinstance(answer, list):
+        # ducttape fix
+        if sorted(answer, key=lambda x: list(x.values())[-1] ) == sorted(learner_answer, key=lambda x: list(x.values())[-1] ):
+            return Response(response='{"Message": "Nice Going bud. On to the next.. Pitter patter"}', status=200)
+        else:
+            return Response(response='{"error": "Was the answer correct? In the words of the late E40, NOPE."}', status=400)
+
+
 
 
 if __name__ == '__main__':
